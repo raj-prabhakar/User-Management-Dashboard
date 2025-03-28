@@ -90,4 +90,4 @@ user-management-assignment/
 ## Bonus Implementations
 ✅ Client-side search and filtering in the user list.
 ✅ Navigation using React Router.
-✅ Deployed on **[Live Demo](https://your-deployment-link.com)**
+✅ Deployed on **[Live Demo](https://user-management-dashboard-cyan-iota.vercel.app/login)**
