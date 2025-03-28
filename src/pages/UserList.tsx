@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import { toast } from 'react-hot-toast';
 import { getUsers, deleteUser } from '../services/api';
 import { 
   Search, Edit2, Trash2, LogOut, ChevronLeft, ChevronRight, 
@@ -46,9 +46,7 @@ const UserList = () => {
       setUsers(response.data);
       setTotalPages(response.total_pages);
     } catch (error) {
-      toast.error('Failed to fetch users', {
-        description: 'Please check your network connection',
-      });
+      toast.error('Failed to fetch users');
     } finally {
       setIsLoading(false);
     }
@@ -60,15 +58,11 @@ const UserList = () => {
     try {
       await deleteUser(selectedUser.id);
       setUsers(users.filter(user => user.id !== selectedUser.id));
-      toast.success('User deleted successfully', {
-        description: `${selectedUser.first_name} ${selectedUser.last_name} has been removed.`,
-      });
+      toast.success('User deleted successfully');
       setIsDeleteDialogOpen(false);
       setSelectedUser(null);
     } catch (error) {
-      toast.error('Failed to delete user', {
-        description: 'Please try again later',
-      });
+      toast.error('Failed to delete user');
     }
   };
 
@@ -78,9 +72,7 @@ const UserList = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    toast.success('Logged out successfully', {
-      description: 'You have been signed out of your account.',
-    });
+    toast.success('Logged out successfully');
     navigate('/login');
   };
 
