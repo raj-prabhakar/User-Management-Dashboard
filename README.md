@@ -1,54 +1,88 @@
-# React + TypeScript + Vite
+# User Management Panel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is a React-based front-end application that interacts with the [Reqres API](https://reqres.in/) to simulate basic user management tasks. The project is divided into three levels of complexity: authentication, listing users, and user management (edit/delete operations).
 
-Currently, two official plugins are available:
+## Features
+### Level 1: Authentication
+- Users can log in using credentials.
+- Uses the `POST /api/login` endpoint for authentication.
+- Successful login stores the token and redirects to the user list page.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Level 2: List All Users
+- Displays a paginated list of users using the `GET /api/users?page=1` endpoint.
+- Users' first name, last name, and avatar are displayed.
+- Supports pagination or lazy loading.
 
-## Expanding the ESLint configuration
+### Level 3: Edit, Delete, and Update Users
+- Edit user details using the `PUT /api/users/{id}` endpoint.
+- Delete users from the list using the `DELETE /api/users/{id}` endpoint.
+- Success and error messages are displayed appropriately.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
+- **React 19** for building UI components.
+- **React Router** for navigation.
+- **Axios** for making API requests.
+- **Tailwind CSS** for styling.
+- **ESLint** for code linting.
+- **Vite** for a fast development server.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation and Setup
+### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (Recommended version: 18+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Steps to Run Locally
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/your-username/user-management-assignment.git
+   cd user-management-assignment
+   ```
+
+2. **Install Dependencies**
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the Development Server**
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
+   The application will be available at `http://localhost:5173`.
+
+4. **Build for Production**
+   ```sh
+   npm run build
+   ```
+
+5. **Run ESLint Check**
+   ```sh
+   npm run lint
+   ```
+
+## Project Structure
+```
+user-management-assignment/
+│── src/
+│   ├── components/   # Reusable components
+│   ├── pages/        # Page components (Login, User List, etc.)
+│   ├── services/     # API calls
+│   ├── styles/       # Tailwind and custom styles
+│   ├── App.tsx       # Main application file
+│   ├── main.tsx      # Entry point
+│── public/           # Static assets
+│── .eslintrc.json    # ESLint configuration
+│── tailwind.config.js # Tailwind CSS configuration
+│── package.json      # Project dependencies & scripts
+│── README.md         # Project documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Assumptions & Considerations
+- The authentication token is stored in `localStorage`.
+- Users are redirected to the login page if the token is missing.
+- API errors are handled gracefully with messages.
