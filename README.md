@@ -86,8 +86,3 @@ user-management-assignment/
 - The authentication token is stored in `localStorage`.
 - Users are redirected to the login page if the token is missing.
 - API errors are handled gracefully with messages.
-
-## Bonus Implementations
-✅ Client-side search and filtering in the user list.
-✅ Navigation using React Router.
-✅ Deployed on **[Live Demo](https://user-management-dashboard-cyan-iota.vercel.app/login)**
