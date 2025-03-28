@@ -24,6 +24,7 @@ const UserList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,6 +74,7 @@ const UserList = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     toast.success('Logged out successfully');
+    setLogoutDialogOpen(false);
     navigate('/login');
   };
 
@@ -91,7 +93,7 @@ const UserList = () => {
             <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
           </div>
           <button
-            onClick={handleLogout}
+            onClick={() => setLogoutDialogOpen(true)}
             className="flex items-center px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
           >
             <LogOut size={18} className="mr-2" />
@@ -130,6 +132,42 @@ const UserList = () => {
                   className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
                 >
                   Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Dialog */}
+      {logoutDialogOpen && (
+        <div className="fixed inset-0 bg-opacity-30 backdrop-blur-md flex items-center justify-center z-[100] p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-gray-900">Delete User</h2>
+                <button 
+                  onClick={() => setLogoutDialogOpen(false)}
+                  className="text-gray-500 hover:text-gray-700 cursor-pointer"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Are you sure you want to Logout
+              </p>
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => setLogoutDialogOpen(false)}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
+                >
+                  Logout
                 </button>
               </div>
             </div>
